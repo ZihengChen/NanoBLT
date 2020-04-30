@@ -1,10 +1,10 @@
-# as a part of EventSelection
-# self = EventSelection
+# as a part of DileptonAnalyzer
+# self = DileptonAnalyzer
 
 import pandas as pd
 from Framework_Common import *
 
-def load_features_from_nanoaod_to_device(self, nanoaodFile):
+def load_features_from_nanoaod(self, nanoaodFile):
     # parse file dir, name, suffix
     temp = nanoaodFile.split("/")
     self.nanoaodFilePath = "/".join(temp[:-1])+"/" 
@@ -32,19 +32,16 @@ def load_features_from_nanoaod_to_device(self, nanoaodFile):
     self.read_features_from_tree(self.inputFeatureConfigs)
     # precomput object indexing
     self.features['nElectron_headIndex'] = np.insert(np.cumsum(self.features['nElectron'])[:-1],0,0).astype(np.int32)
-    # deploy data to device
-    self.copy_features_to_device()
     self.n = np.int32(self.features['HLT_Ele32_WPTight_Gsf'].size)
-    end = timer()
 
+    end = timer()
     # debug info
     if self.verboseRunningInfo:
         print("--- n = ",self.n)
         print("io read: ",end-start)
 
 
-
-def initiate_intermediate_and_output_features_on_host_and_device(self):
+def initiate_output_features_on_host_and_device(self):
     
     # ========== output features ==========
     self.outputFeatureConfigs = [
@@ -74,6 +71,9 @@ def initiate_intermediate_and_output_features_on_host_and_device(self):
 def save_event_retures_as_h5(self, outputDir=None):
     if not outputDir:
         outputDir = self.nanoaodFilePath
+    
+    if not os.path.exists(outputDir):
+        os.system('mkdir -p '+outputDir)
 
     start = timer()
     for catagory in range(1):

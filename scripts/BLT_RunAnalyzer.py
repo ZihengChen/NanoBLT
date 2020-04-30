@@ -2,7 +2,7 @@
 # coding: utf-8
 
 
-from EventSelection import *
+from DileptonAnalyzer import *
 import glob
 import threading, queue
 inputDir  = "/home/zchen/cms/data/EGamma_Run2018B/"
@@ -14,10 +14,10 @@ nWorkers = 8
 jobQueue = queue.Queue()
 def worker():
     jobId, files = jobQueue.get()
-    ana = EventSelection()
+    ana = DileptonAnalyzer()
     for file in files:
-        ana.load_features_from_nanoaod_to_device(file)
-        ana.initiate_intermediate_and_output_features_on_host_and_device()
+        ana.load_features_from_nanoaod(file)
+        ana.initiate_output_features_on_host_and_device()
         ana.run_analyzer()
         ana.realse_features_on_device()
         ana.save_event_retures_as_h5(outputDir)

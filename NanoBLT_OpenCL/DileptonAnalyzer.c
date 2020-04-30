@@ -1,4 +1,3 @@
-// objectSelection_muons
 # define MAXNLEPTON 3
 # define MAXNJET 5
 

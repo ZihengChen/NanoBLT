@@ -2,6 +2,7 @@ import uproot
 import uproot_methods
 import numpy as np
 import pyopencl as cl
+import os,sys
 from timeit import default_timer as timer
 import warnings
 warnings.filterwarnings("ignore")

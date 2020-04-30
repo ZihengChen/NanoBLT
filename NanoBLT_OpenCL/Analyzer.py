@@ -1,17 +1,18 @@
 
 from Framework_Common import *
 
-class Selection():
+class Analyzer():
     def __init__(self):
         temp = __file__.split("/")
-        self.selectionCodeDir = "/".join(temp[:-1])+"/" 
+        self.anlyzerCodeDir = "/".join(temp[:-1])+"/" 
+        self.d_features = {}
 
         
     def build_cl_program(self):
         clSrc = ""
         # read opencl src files
         for clSrcFile in self.clSrcFiles:
-            f = open( self.selectionCodeDir + clSrcFile,"r") 
+            f = open( self.anlyzerCodeDir + clSrcFile,"r") 
             clSrc += f.read()
             f.close()
         # build opencl program from src
@@ -24,12 +25,11 @@ class Selection():
         self.features = self.tree.arrays(featureConfigs, flatten=True, namedecode="utf-8")
 
     def copy_features_to_device(self):
+        
         # copy feartures from host to device
-        self.d_features = { 
-            key : cl.Buffer(context, cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR, 
-                            hostbuf=self.features[key] )
-            for key in self.features.keys()
-        }
+        for key in self.features.keys():
+            self.d_features[key] = cl.Buffer(context, cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR, hostbuf=self.features[key] )
+            
 
     def realse_features_on_device(self):
         for key in self.d_features.keys():

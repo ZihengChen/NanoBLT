@@ -1,10 +1,10 @@
-from Selection import *
+from Analyzer import *
 
 
-class EventSelection(Selection):
-    from EventSelection_IOFeatures import \
-        load_features_from_nanoaod_to_device, \
-        initiate_intermediate_and_output_features_on_host_and_device, \
+class DileptonAnalyzer(Analyzer):
+    from DileptonAnalyzer_IOFeatures import \
+        load_features_from_nanoaod, \
+        initiate_output_features_on_host_and_device, \
         save_event_retures_as_h5, \
         postProcessDataFrame
 
@@ -12,16 +12,19 @@ class EventSelection(Selection):
     def __init__(self):
         super().__init__()
         self.clSrcFiles = [
-            'EventSelection.c'
+            'DileptonAnalyzer.c'
         ]
         self.build_cl_program()
-        self.verboseRunningInfo = False
+        self.verboseRunningInfo = True
         print(device.platform.name, device.name, device.version)
     
 
     def run_analyzer(self):
-        # run opencl functions
+        
         start = timer()
+        # copy input to device
+        self.copy_features_to_device()
+        # run opencl functions
         self.clProgram.run_analyzer(
             # opencl kernal configration, (queue, globalSize, localSize)
             self.clCmdQueue, ((int(self.n/blockSize)+1)*blockSize,), (int(blockSize),),
@@ -63,6 +66,7 @@ class EventSelection(Selection):
             # ========== constants ==========  
             self.n
         )
+        # copy output features to host
         self.copy_features_to_host(self.outputFeatureConfigs)
         end = timer()
         if self.verboseRunningInfo:
