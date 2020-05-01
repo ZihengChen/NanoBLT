@@ -14,4 +14,4 @@ global context
 context = cl.Context([device])
 
 global blocakSize 
-blockSize  = device.max_work_group_size
+blockSize  = 1024 #device.max_work_group_size
