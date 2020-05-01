@@ -1,3 +1,10 @@
+
+# @author Ziheng Chen
+# @email zihengchen2015@u.northwestern.edu
+# @create date 2020-05-01 00:42:16
+# @modify date 2020-05-01 00:42:16
+
+
 from Analyzer import *
 
 
@@ -27,7 +34,7 @@ class DileptonAnalyzer(Analyzer):
         start = timer()
         # run opencl functions
         self.clEvent = self.clProgram.run_analyzer(
-            # opencl kernal configration, (queue, globalSize, localSize)
+            # opencl kernel configration, (queue, globalSize, localSize)
             self.clCmdQueue, ((int(self.n/blockSize)+1)*blockSize,), (int(blockSize),),
             
             # ========== output ==========
@@ -76,5 +83,5 @@ class DileptonAnalyzer(Analyzer):
         
         if self.verboseRunningInfo:
             elapsed = 1e-6*(self.clEvent.profile.end-self.clEvent.profile.start)
-            print("cl run  : {:10.2f} ms -- profiler: kernal {:5.2f} ms [rate = {:5.4} x1E9 event/s ]".format((end-start)*1e3, elapsed, 1e-6*self.n/elapsed))
+            print("cl run  : {:10.2f} ms -- profiler: kernel {:5.2f} ms [rate = {:5.4} x1E9 event/s ]".format((end-start)*1e3, elapsed, 1e-6*self.n/elapsed))
             

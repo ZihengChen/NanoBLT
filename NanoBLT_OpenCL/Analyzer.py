@@ -1,4 +1,9 @@
 
+# @author Ziheng Chen
+# @email zihengchen2015@u.northwestern.edu
+# @create date 2020-05-01 00:40:04
+# @modify date 2020-05-01 00:40:15
+
 from Framework import *
 
 class Analyzer():
