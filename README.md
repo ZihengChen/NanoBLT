@@ -6,11 +6,11 @@ An example dilepton analyzer is included for selection Z(ee). In each event, it 
 The performance of the OpenCL kernal is messured with opencl inbuilt profiler. The result on CPUs and GPUs are shown below.
 
 <p align="center">
-<img src="https://github.com/ZihengChen/NanoBLT/blob/master/plots/throughput.png" width="800">
+<img src="https://github.com/ZihengChen/NanoBLT/blob/master/plots/throughput.png" width="600">
 </p>
 
 Dilepton Analyzer saves the selected events as a ready-to-plot dataframe. The plot of dilepton invirant mass is shown below.
 
 <p align="center">
-<img src=https://github.com/ZihengChen/NanoBLT/blob/master/plots/Dilepton_mass.png width="400">
+<img src=https://github.com/ZihengChen/NanoBLT/blob/master/plots/Dilepton_mass.png width="500">
 </p>
