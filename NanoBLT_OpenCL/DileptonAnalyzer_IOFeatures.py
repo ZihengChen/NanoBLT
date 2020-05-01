@@ -1,8 +1,7 @@
-# as a part of DileptonAnalyzer
-# self = DileptonAnalyzer
 
 import pandas as pd
-from Framework_Common import *
+from Framework import *
+from Analyzer import P4_PtEtaPhiM
 
 def load_features_from_nanoaod(self, nanoaodFile):
     # parse file dir, name, suffix
@@ -38,7 +37,7 @@ def load_features_from_nanoaod(self, nanoaodFile):
     # debug info
     if self.verboseRunningInfo:
         print("--- n = ",self.n)
-        print("io read: ",end-start)
+        print("io read : {:10.2f} ms".format((end-start)*1e3))
 
 
 def initiate_output_features_on_host_and_device(self):
@@ -68,7 +67,7 @@ def initiate_output_features_on_host_and_device(self):
     self.initiate_features_on_host_and_device(self.outputFeatureConfigs)
 
 
-def save_event_retures_as_h5(self, outputDir=None):
+def save_catagorized_events_as_h5(self, outputDir=None):
     if not outputDir:
         outputDir = self.nanoaodFilePath
     
@@ -88,7 +87,8 @@ def save_event_retures_as_h5(self, outputDir=None):
     # reset features
     self.features = None
     end = timer()
-    if self.verboseRunningInfo: print("io save: ",end-start)
+    if self.verboseRunningInfo: 
+        print("io write: {:10.2f} ms".format((end-start)*1e3))
 
 def postProcessDataFrame(self, df):
     lep1 = P4_PtEtaPhiM(df.Lepton1_pt, df.Lepton1_eta, df.Lepton1_phi, df.Lepton1_mass)

@@ -20,7 +20,7 @@ def worker():
         ana.initiate_output_features_on_host_and_device()
         ana.run_analyzer()
         ana.realse_features_on_device()
-        ana.save_event_retures_as_h5(outputDir)
+        ana.save_catagorized_events_as_h5(outputDir)
     jobQueue.task_done()
 
  

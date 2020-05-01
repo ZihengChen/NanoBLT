@@ -5,7 +5,7 @@ class DileptonAnalyzer(Analyzer):
     from DileptonAnalyzer_IOFeatures import \
         load_features_from_nanoaod, \
         initiate_output_features_on_host_and_device, \
-        save_event_retures_as_h5, \
+        save_catagorized_events_as_h5, \
         postProcessDataFrame
 
 
@@ -21,11 +21,12 @@ class DileptonAnalyzer(Analyzer):
 
     def run_analyzer(self):
         
-        start = timer()
+        
         # copy input to device
         self.copy_features_to_device()
+        start = timer()
         # run opencl functions
-        self.clProgram.run_analyzer(
+        self.clEvent = self.clProgram.run_analyzer(
             # opencl kernal configration, (queue, globalSize, localSize)
             self.clCmdQueue, ((int(self.n/blockSize)+1)*blockSize,), (int(blockSize),),
             
@@ -66,8 +67,14 @@ class DileptonAnalyzer(Analyzer):
             # ========== constants ==========  
             self.n
         )
+        self.clEvent.wait()
+        end = timer()
+        
         # copy output features to host
         self.copy_features_to_host(self.outputFeatureConfigs)
-        end = timer()
+        
+        
         if self.verboseRunningInfo:
-            print("evtCata: ",end-start)
+            elapsed = 1e-6*(self.clEvent.profile.end-self.clEvent.profile.start)
+            print("cl run  : {:10.2f} ms -- profiler: kernal {:5.2f} ms [rate = {:5.4} x1E9 event/s ]".format((end-start)*1e3, elapsed, 1e-6*self.n/elapsed))
+            
