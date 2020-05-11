@@ -3,7 +3,7 @@ NanoBLT is a `ROOT`-free and `CMSSW`-free analyzer running on [CMS NanoAOD](http
 
 ## Example Dilepton Analyzer for Z(ee) Events
 An example dilepton analyzer is included for selection Z(ee). In each event, it first select electrons based on kinematics and reconstruction cuts. Then it selects events that pass single electron trigger and have 2 opposite good electrons. 
-The performance of the OpenCL kernal is messured with opencl inbuilt profiler. The result on CPUs and GPUs are shown below.
+The performance of the OpenCL kernel is messured with opencl inbuilt profiler. The result on CPUs and GPUs are shown below.
 
 <p align="center">
 <img src="https://github.com/ZihengChen/NanoBLT/blob/master/plots/throughputs.png" width="800">
