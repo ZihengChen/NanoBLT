@@ -16,7 +16,7 @@ Dilepton Analyzer saves the selected events as a ready-to-plot dataframe. The pl
 </p>
 
 
-## Setup on LPC
+## Setup GPU Interface on LPC
 First log into lpc GPU node `ssh -Y username@cmslpcgpu1.fnal.gov`
 
 if you have not installed local anaconda python, do it with
@@ -40,6 +40,10 @@ cl.get_plotforms
 # [ <pyopencl.Platform 'NVIDIA CUDA' at 0x56319edefbb0>, 
 #   <pyopencl.Platform 'Portable Computing Language' at 0x7f99c2d7f020>]
 ``` 
+Now, you are all set on LPC. Get NanoBLT and have fun.
+```bash
+git clone https://github.com/ZihengChen/NanoBLT.git
+```
 
 
 
