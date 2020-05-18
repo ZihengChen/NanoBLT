@@ -20,13 +20,13 @@ Dilepton Analyzer saves the selected events as a ready-to-plot dataframe. The pl
 First log into lpc GPU node `ssh -Y username@cmslpcgpu1.fnal.gov`
 
 if you have not installed local anaconda python, do it with
-```
+```bash
 wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
 bash Downloads/Anaconda3-2020.02-Linux-x86_64.sh -b -u -p /uscms_data/d3/zchen/anaconda
 ```
 Then source CUDA and anaconda environment `source SetupCUDA.sh` and you should be able to see `nvidia-smi`, `nvcc --version` and `which python`. Then install some python package.
 
-``` 
+```bash
 pip install --user uproot pycuda
 conda install pyopencl
 conda install ocl-icd-system
