@@ -44,6 +44,7 @@ Now, you are all set on LPC. Get NanoBLT and have fun.
 ```bash
 git clone https://github.com/ZihengChen/NanoBLT.git
 ```
+On eos LPC, nanoAOD files of EGamma_Run2018 dataset are located at `/eos/uscms/store/user/zchen/nanoaod/data`
 
 
 
