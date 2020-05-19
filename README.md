@@ -24,7 +24,7 @@ if you have not installed local anaconda python, do it with
 wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
 bash Downloads/Anaconda3-2020.02-Linux-x86_64.sh -b -u -p /uscms_data/d3/zchen/anaconda
 ```
-Then source CUDA and anaconda environment `source SetupCUDA.sh` and you should be able to see `nvidia-smi`, `nvcc --version` and `which python`. It is helpful to refer the [guidance twiki of LPC GPU](https://twiki.cern.ch/twiki/bin/view/Main/GPUSoftwareInstallConfigure) . Then install some python package.
+Then source CUDA and anaconda environment `source SetupCUDA.sh` (.sh file [here](https://github.com/ZihengChen/Notebook/blob/master/LPC_SetupCUDA.sh) ) and you should be able to see `nvidia-smi`, `nvcc --version` and `which python`. It is helpful to refer the [guidance twiki of LPC GPU](https://twiki.cern.ch/twiki/bin/view/Main/GPUSoftwareInstallConfigure) . Then install some python package.
 
 ```bash
 pip install --user uproot pycuda
