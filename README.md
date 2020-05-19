@@ -35,7 +35,7 @@ conda install pocl
 After doing this, you can try python
 ```python
 import pyopencl as cl
-cl.get_plotforms
+cl.get_plotforms()
 # should prints the following:
 # [ <pyopencl.Platform 'NVIDIA CUDA' at 0x56319edefbb0>, 
 #   <pyopencl.Platform 'Portable Computing Language' at 0x7f99c2d7f020>]
